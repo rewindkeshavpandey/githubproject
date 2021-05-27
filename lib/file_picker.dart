@@ -58,7 +58,7 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
     if (!mounted) return;
     setState(() {
       _loadingPath = false;
-      
+      print(_paths!.first.extension);
       _fileName =
           _paths != null ? _paths!.map((e) => e.name).toString() : '...';
     });
@@ -107,7 +107,7 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                   builder: (BuildContext context) => _loadingPath
                       ? Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
-                          child: const CircularProgressIndicator(),
+                          child: null,
                         )
                       : _directoryPath != null
                           ? ListTile(
