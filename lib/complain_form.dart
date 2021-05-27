@@ -1,6 +1,8 @@
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 
 class ComplainForm extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class ComplainForm extends StatefulWidget {
 }
 
 class _ComplainFormState extends State<ComplainForm> {
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? _fileName;
   List<PlatformFile>? _paths;
@@ -59,6 +62,36 @@ class _ComplainFormState extends State<ComplainForm> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: _scaffoldKey,
+
+  var _changeLanguage = false;
+  List<String> category = [
+    'Public Multi-Media Complaint ',
+    'Serial Complaint',
+    'First-time complaint',
+    'Good Customer Complaint',
+    'Personnel Complain',
+    'Product Specific Complaint',
+    'Wait – Times Complaint'
+  ];
+  String? selectedCategory;
+
+  List<String> complain = [
+    'Debt collection',
+    'Credit reporting, credit repair services, or other personal consumer reports',
+    'Credit card or prepaid card',
+  ];
+  String? selectedComplain;
+
+  List<String> priority = ['Active', 'Inactive'];
+
+  String? selectedpriority;
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+
       appBar: AppBar(
         actions: [
           Padding(
@@ -107,9 +140,48 @@ class _ComplainFormState extends State<ComplainForm> {
                 ],
               ),
               SizedBox(height: 10),
-              DropdownButtonFormField(
-                  decoration: InputDecoration(border: OutlineInputBorder()),
-                  items: []),
+
+
+              Container(
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 1.0, style: BorderStyle.solid),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    iconSize: 30,
+                    value: selectedCategory,
+                    hint: Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text('Categories'),
+                    ),
+                    items: category.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            value,
+                            // maxLines: 1,overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(
+                        () {
+                          selectedCategory = value;
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+
+
               SizedBox(height: 10),
               Row(
                 children: [
@@ -157,21 +229,104 @@ class _ComplainFormState extends State<ComplainForm> {
                 ],
               ),
               SizedBox(height: 10),
+
+
+              // complain for field
               Row(
                 children: [
                   Expanded(
-                    child: DropdownButtonFormField(
-                        decoration:
-                            InputDecoration(border: OutlineInputBorder()),
-                        items: []),
+                    // child: DropdownButtonFormField(
+                    //     decoration:
+                    //         InputDecoration(border: OutlineInputBorder()),
+                    //     items: []),
+
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side:
+                              BorderSide(width: 1.0, style: BorderStyle.solid),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          iconSize: 30,
+                          value: selectedComplain,
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text('Complain'),
+                          ),
+                          items: complain.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  value,
+                                  // maxLines: 1,overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? value) {
+                            setState(
+                              () {
+                                selectedComplain = value;
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(width: 25),
+
+                  // priority field
                   Expanded(
-                    child: DropdownButtonFormField(
-                        decoration:
-                            InputDecoration(border: OutlineInputBorder()),
-                        items: []),
-                  ),
+                      // child: DropdownButtonFormField(
+                      //     decoration:
+                      //         InputDecoration(border: OutlineInputBorder()),
+                      //     items: []),
+                      child: Container(
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1.0, style: BorderStyle.solid),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      ),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        iconSize: 30,
+                        value: selectedpriority,
+                        hint: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text('priority'),
+                        ),
+                        items: priority.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                value,
+                                // maxLines: 1,overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(
+                            () {
+                              selectedpriority = value;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  )),
+
                 ],
               ),
               SizedBox(height: 10),
@@ -185,6 +340,7 @@ class _ComplainFormState extends State<ComplainForm> {
                   )
                 ],
               ),
+
               
               Builder(
                 builder: (BuildContext context) => _loadingPath
@@ -240,6 +396,56 @@ class _ComplainFormState extends State<ComplainForm> {
                 onTap: () {
                   _openFileExplorer();
                 },
+
+              Row(
+                children: [
+                  // Row(
+                  //   children: [
+                  //     Card(elevation: 1, child: Text("photo.jpg")),
+                  //     IconButton(
+                  //       onPressed: () {},
+                  //       icon: Icon(Icons.cancel),
+                  //       iconSize: 15,
+                  //     )
+                  //   ],
+                  // ),
+                  Card(
+                      child: Row(
+                    children: [
+                      Text('Photo.jpg'),
+                      GestureDetector(
+                        child: Icon(Icons.cancel),
+                      ),
+                    ],
+                  ),
+                  ),
+
+                  Card(
+                      child: Row(
+                    children: [
+                      Text('flutter.jpg'),
+                      GestureDetector(
+                        child: Icon(Icons.cancel),
+                      ),
+                    ],
+                  ),
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Card(elevation: 1, child: Text("photo.jpg")),
+                  //     IconButton(
+                  //       onPressed: () {},
+                  //       icon: Icon(Icons.cancel),
+                  //       iconSize: 15,
+                  //     )
+                  //   ],
+                  // ),
+                ],
+              ),
+              SizedBox(height: 10),
+              InkWell(
+                onTap: () {},
+
                 child: Row(
                   children: [
                     Container(
