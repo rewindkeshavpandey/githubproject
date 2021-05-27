@@ -15,7 +15,7 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
   String? _extension;
   bool _loadingPath = false;
   bool _multiPick = true;
-  
+
   FileType _pickingType = FileType.any;
   TextEditingController _controller = TextEditingController();
 
@@ -24,18 +24,6 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
     super.initState();
     _controller.addListener(() => _extension = _controller.text);
   }
-
-  
-
-
-
-
-
-
-
-
-
-
 
 //multiple file pick code
   void _openFileExplorer() async {
@@ -64,10 +52,6 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
     });
   }
 
-  
-
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -83,13 +67,6 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                
-                
-
-              
-
-
-
                 Padding(
                   padding: const EdgeInsets.only(top: 50.0, bottom: 20.0),
                   child: Column(
@@ -98,8 +75,6 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                         onPressed: () => _openFileExplorer(),
                         child: const Text("Add Files"),
                       ),
-                      
-                      
                     ],
                   ),
                 ),
@@ -122,36 +97,37 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount:
-                                    _paths != null && _paths!.isNotEmpty
-                                        ? _paths!.length
-                                        : 1,
+                                        _paths != null && _paths!.isNotEmpty
+                                            ? _paths!.length
+                                            : 1,
                                     itemBuilder:
-                                    (BuildContext context, int index) {
-                                  final bool isMultiPath =
-                                      _paths != null && _paths!.isNotEmpty;
-                                  final String name = '' +
-                                      (isMultiPath
-                                          ? _paths!
-                                              .map((e) => e.name)
-                                              .toList()[index]
-                                          : _fileName ?? '...');
-                                  
+                                        (BuildContext context, int index) {
+                                      final bool isMultiPath =
+                                          _paths != null && _paths!.isNotEmpty;
+                                      final String name = '' +
+                                          (isMultiPath
+                                              ? _paths!
+                                                  .map((e) => e.name)
+                                                  .toList()[index]
+                                              : _fileName ?? '...');
 
-                                  return  Row(children: [
-                                    
-                                    Text(name, style: TextStyle(color:Colors.red),
-                                    ),
-                                    IconButton(onPressed: (){
-
-                                    }, icon: Icon(Icons.remove_circle)),
-
-                                    ElevatedButton(
-                        onPressed: () => (){},
-                        child: const Text("Clear temporary files"),
-                      ),
-                                  ],);
+                                      return Row(
+                                        children: [
+                                          Text(
+                                            name,
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                          IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(Icons.remove_circle)),
+                                          ElevatedButton(
+                                            onPressed: () => () {},
+                                            child: const Text(
+                                                "Clear temporary files"),
+                                          ),
+                                        ],
+                                      );
                                     },
-                                   
                                   ),
                                 )
                               : const SizedBox(),
