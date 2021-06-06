@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:githubproject/Test_page.dart';
 import 'package:githubproject/complain_form.dart';
 import 'package:githubproject/home_page.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
        
         primarySwatch: Colors.blue,
       ),
-      home:FilePickerDemo()
+      home:Test()
     );
   }
 }
